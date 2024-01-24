@@ -12,16 +12,33 @@ services:
     #   - /app/node_modules
     # command: /bin/sh -c "yarn generate:prisma && yarn migrate:init && yarn seed && yarn start" # Comment this line when run in PRODUCTION mode
     environment:
-      - MONGO_URL=mongodb://admin:123456@mongodb/
-      - REDIS_HOST=redis
-      - REDIS_URL=redis://redis:6379
-      - MONGO_DB=capstone
+      - NODE_ENV=development
+      - PORT=4000
+      - DATABASE_URL=postgresql://postgres:localdb@postgres:5432/capstone
+      - APOLLO_PLAYGROUND=true
+      - APOLLO_INTROSPECTION=true
+      - APOLLO_DEBUG=true
+      - APOLLO_TRACING=true
+      - LOGGER_ROUTE_NAME=capstone
+      - LOGGER_ROUTE_STORAGE=false
+      - KEY_AUTHORIZATION=test
+      - KEY_CONSOLE=test_key
     env_file:
       - .env
     depends_on:
-      - mongodb
-      - redis
+      - postgres
+
+  postgres:
+    image: postgres:12.1-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: localdb
+      POSTGRES_DB: capstone
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres:/var/lib/postgresql/data
 
 volumes:
-  mongodb:
-  redis:
+  postgres:
