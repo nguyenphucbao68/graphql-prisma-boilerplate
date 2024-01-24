@@ -2,6 +2,9 @@ import { gql } from "apollo-server-express";
 import UserSchema from "./user/user.schema";
 
 const schema = gql`
+  # Date
+  scalar Date
+
   type Query {
     _empty: String
   }
