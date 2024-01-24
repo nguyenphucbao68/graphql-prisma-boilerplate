@@ -2,10 +2,9 @@ import { PrismaClient } from "@prisma/client";
 import user from "./user.json";
 const prisma = new PrismaClient();
 
-
 async function main() {
   const database = {
-    user
+    user,
   };
 
   for (const [key, value] of Object.entries(database)) {

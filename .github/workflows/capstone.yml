@@ -11,7 +11,7 @@ concurrency:
 
 jobs:
   typecheck:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
@@ -23,7 +23,7 @@ jobs:
         run: yarn typecheck --noEmit --noErrorTruncation --pretty false --incremental false --watch false --skipLibCheck
 
   format:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
@@ -35,7 +35,7 @@ jobs:
         run: yarn format
 
   commitlint:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         with:
