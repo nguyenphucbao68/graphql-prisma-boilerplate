@@ -2,10 +2,6 @@
 
 This is a boilerplate for Node.js project with TypeScript, Express, Prisma, GraphQL, PostgreSQL, and Docker.
 
-# Author
-
-- Bao Nguyen
-
 # Installation
 
 ## 1. Setup .env
