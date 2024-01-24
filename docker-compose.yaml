@@ -1,0 +1,27 @@
+version: "3.4"
+
+services:
+  app:
+    image: capstone
+    build:
+      context: .
+    ports:
+      - "4000:4000"
+    # volumes: # Comment this "volumes" section when run in PRODUCTION mode
+    #   - .:/app
+    #   - /app/node_modules
+    # command: /bin/sh -c "yarn generate:prisma && yarn migrate:init && yarn seed && yarn start" # Comment this line when run in PRODUCTION mode
+    environment:
+      - MONGO_URL=mongodb://admin:123456@mongodb/
+      - REDIS_HOST=redis
+      - REDIS_URL=redis://redis:6379
+      - MONGO_DB=capstone
+    env_file:
+      - .env
+    depends_on:
+      - mongodb
+      - redis
+
+volumes:
+  mongodb:
+  redis:
