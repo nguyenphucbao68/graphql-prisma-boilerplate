@@ -16,7 +16,6 @@ const logger = new Logger();
 const whitelist = (process.env.SERVER_WHITE_LIST || "").split(",") || [];
 const corsEnabled = process.env.ENABLE_CORS === "true";
 
-
 // Initializes application
 const app = express();
 app.use(compression());
@@ -60,7 +59,6 @@ app.use(
   }),
 );
 
-
 app.get("/healthcheck", (req, res) => {
   res.json({
     ...req.headers,
@@ -83,7 +81,7 @@ app.use(graphqlUploadExpress());
 
 let server: any;
 async function startServer() {
-  server = createApolloServer(schema, resolvers, models, permissions, loaders);
+  server = createApolloServer(schema, resolvers, permissions);
   await server.start();
   server.applyMiddleware({ app, path: "/graphql", cors: false });
 }

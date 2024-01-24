@@ -10,7 +10,6 @@ import Logger from "./logger";
 require("dotenv").config();
 const { makeExecutableSchema } = require("@graphql-tools/schema");
 
-
 const { rateLimitDirectiveTypeDefs, rateLimitDirectiveTransformer } =
   rateLimitDirective();
 
@@ -23,13 +22,10 @@ const checkAuthorization = async (token: string) => {
   }
 };
 
-
 export const createApolloServer = (
   schema: any,
   resolvers: any,
-  models: any,
   permissions: any,
-  loaders: any,
   // whitelist: string[],
   // corsEnabled: boolean,
 ): any => {
@@ -66,10 +62,7 @@ export const createApolloServer = (
           authUser.role = "admin";
         }
       }
-      return Object.assign(
-        { isRoot, authUser, loaders, prisma, redis: redisClient },
-        models,
-      );
+      return Object.assign({ isRoot, authUser, prisma });
     },
     validationRules: [depthLimit(20)],
     formatError: (error) => {

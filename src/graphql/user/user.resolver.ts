@@ -30,6 +30,9 @@ const Query = {
   ): Promise<User[]> => {
     return await prisma.user.findMany();
   },
+  helloWord: async (): Promise<string> => {
+    return "Hello Word";
+  },
 };
 
 const Mutation = {
